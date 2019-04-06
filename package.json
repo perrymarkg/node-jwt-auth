@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb-memory-server": "^4.2.1",
     "mongoose": "^5.4.19",
+    "proxyquire": "^2.1.0",
     "request": "^2.88.0"
   },
   "devDependencies": {
