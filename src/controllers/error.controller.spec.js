@@ -10,7 +10,7 @@ let next = function(){}
 
 describe("Error handler tests", () => {
 
-    it("Should hadle error", () => {
+    it("Should handle error", () => {
         const error = boom.unauthorized('Unathaurized');
         handler.error(error, req, res, next);
         expect(res.statusCode).toBe(401);
