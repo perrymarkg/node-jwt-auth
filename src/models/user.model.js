@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const helper = require('../lib/helper');
 
 const UserSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -9,15 +9,14 @@ const UserSchema = mongoose.Schema({
 }, {timestamps: true});
 
 UserSchema.pre('save', function(next) {
-    var User = this;
-
+    const User = this;
     if (this.isModified('password') || this.isNew) {
-        bcrypt.genSalt(10)
-        .then(salt => bcrypt.hash(User.password, salt))
-        .then(hash => {
-            User.password = hash;
-            next();
-        }).catch(error => next(error));
+        helper.encryptPassword(User.password)
+            .then(encrypted => {
+                User.password = encrypted;
+                next();
+            })
+            .catch(error => next(error))
     }
 });
 
