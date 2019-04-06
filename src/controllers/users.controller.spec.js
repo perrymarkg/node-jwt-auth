@@ -2,9 +2,11 @@ const controller = require('./users.controller');
 const idb = require('../config/in-memory-db');
 const User = require('../models/user.model');
 const httpMocks = require('node-mocks-http');
+const eventEmitter = require('events').EventEmitter;
+const UserService = require('../services/user.service');
 
-let req = httpMocks.createRequest();
-let res = httpMocks.createResponse();
+let req, res;
+
 let next = function(){}
 
 describe("Auth Route Test", () => {
@@ -17,9 +19,9 @@ describe("Auth Route Test", () => {
     beforeEach(() => {
         req = httpMocks.createRequest();
         res = httpMocks.createResponse({
-            eventEmitter: require('events').EventEmitter
+            eventEmitter: eventEmitter
         });
-
+        
     })
 
     afterEach(async() => {
@@ -42,35 +44,11 @@ describe("Auth Route Test", () => {
 
         controller.saveUser(req, res, next);
         
-        res.on('end', () => {d
+        res.on('end', d => {
             expect(res.statusCode).toEqual(200);
             expect(res._getData() instanceof User).toBe(true);
         })
-
-
     });
 
-    it("Should hanlde validationError", () => {
-
-        let next = function(value) {
-            
-            let v = value;
-
-        }
-
-        req = httpMocks.createRequest({
-        
-                "msg": "The error message",
-                "param": "param.name.with.index[0]",
-                "value": "param value",
-                "location": "body",
-    
-        });
-
-        
-
-        controller.validationHandler(req, res, next)
-        
-    });
 
 });
