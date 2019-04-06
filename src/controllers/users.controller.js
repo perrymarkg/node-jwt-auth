@@ -1,10 +1,11 @@
 const UserService = require('../services/user.service');
 const { validationResult } = require('express-validator/check');
+const boom = require('boom');
 
 const _this = {
     validationHandler: (req, res, next) => {
         const errors = validationResult(req);
-        console.log('Errors', !errors.isEmpty());
+        
         if (!errors.isEmpty()) {
             next(boom.badRequest(false, errors.array()))
         }
