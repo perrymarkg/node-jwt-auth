@@ -72,7 +72,7 @@ const _this = {
             _this.createUser(email, username,password)
             .save()
             .then(result => resolve(result))
-            .catch(error => reject(_this.handeSaveUserError(error)));
+            .catch(error => reject(error));
         });
     },
     handleMongoError: (e) => {
