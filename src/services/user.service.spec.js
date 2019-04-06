@@ -20,6 +20,7 @@ describe("User Service Tests", () => {
             .saveUser('perry@mail.com', 'dummy', 'samplepassword')
             .then(result => result)
             .catch(error => error);
+        
     });
 
     afterEach(async() => {
@@ -51,10 +52,11 @@ describe("User Service Tests", () => {
         
         expect(result instanceof UserModel).toBe(true)
         expect(result.username).toBe('dummy');
+        expect(result.password).not.toEqual('samplepassword')
     });
 
     it("Should validate a password", async() => {
-
+        
         const result = await UserService
             .validatePassword(User, 'samplepassword')
             .then(result => result)
