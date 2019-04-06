@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const {MongoMemoryServer} = require('mongodb-memory-server');
 const opts = { useNewUrlParser: true, useCreateIndex: true,}
 
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 70000;
 module.exports.init = async function(){
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 70000;
+    
     mongoServer = new MongoMemoryServer();
     return await mongoServer
         .getConnectionString()
