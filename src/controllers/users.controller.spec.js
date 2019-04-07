@@ -102,9 +102,7 @@ describe("Auth Route Test", () => {
 
         // Fire a custom event when our spy is called
         // since we are dealing with async code
-        next.and.callFake(function() {
-            emitter.emit('ended');
-        })
+        next.and.callFake( () => emitter.emit('ended'));
         
         spyOn(UserService, 'saveUser').and.callFake(() => {
             return Promise.reject('Error');
@@ -121,7 +119,9 @@ describe("Auth Route Test", () => {
             // error will be thrown
             done();
         });
-
-        
     });
+
+
+    //it("Should get a user")
+
 });
