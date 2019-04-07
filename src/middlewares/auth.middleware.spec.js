@@ -1,4 +1,4 @@
-const {auth} = require('./auth.middelware');
+const {auth} = require('./auth.middleware');
 let eventEmitter = require('events').EventEmitter;
 const httpMocks = require('node-mocks-http');
 
