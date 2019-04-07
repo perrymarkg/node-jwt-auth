@@ -11,7 +11,7 @@ module.exports.init = async function(){
         .getConnectionString()
         .then((mongoUri) => mongoose.connect(mongoUri, opts))
         .then(result => result);
-    
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 3000;
     return server;
     
 }
